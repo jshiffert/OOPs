@@ -1,9 +1,7 @@
 // main logic
 const inquirer = require('inquirer');
 const fs = require('fs');
-const Square = require('./lib/shapes');
-const Triangle = require('./lib/shapes');
-const Circle = require('./lib/shapes');
+const shapes = require('./lib/shapes');
 const TextClass = require('./lib/text');
 
 function Logo(type,shapeColor,text,textColor) {
@@ -49,23 +47,19 @@ function init() {
                 data.textColor
             );
 
-            if (shape.type == 'triangle') {
-                const triangle = new Triangle(shape.shapeColor);
+            if (shape.type === 'triangle') {
+                const triangle = new shapes.Triangle(shape.shapeColor);
                 svgShape = triangle.render();
-            } else if (shape.type == 'square') {
-                const square = new Square(shape.shapeColor);
+            } else if (shape.type === 'square') {
+                const square = new shapes.Square(shape.shapeColor);
                 svgShape = square.render();
-            } else if (shape.type == 'circle') {
-                const circle = new Circle(shape.shapeColor);
+            } else if (shape.type === 'circle') {
+                const circle = new shapes.Circle(shape.shapeColor);
                 svgShape = circle.render();
             };
 
-            console.log(svgShape);
-
             const textclass = new TextClass(shape.text, shape.textColor);
             svgText = textclass.render();
-
-            console.log(svgText);
         })
         .then(() => {
             var output = svgBase+svgShape+svgText+'</svg>';
