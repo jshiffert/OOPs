@@ -12,7 +12,7 @@ function Logo(type,shapeColor,text,textColor) {
 };
 
 var filename = './examples/logo.svg';
-var svgBase = '<svg version="1.1" xmlns="http://www.w3.org/2000/svg">';
+var svgBase = '<svg version="1.1" width="300" height="200" xmlns="http://www.w3.org/2000/svg">';
 
 function init() {
     inquirer
@@ -64,7 +64,7 @@ function init() {
         .then(() => {
             var output = svgBase+svgShape+svgText+'</svg>';
             fs.writeFile(filename, (output), (err) =>
-                err ? console.log(err) : console.log("Success")
+                err ? console.log(err) : console.log("Generated logo.svg")
             );
         })
         .catch((error) => {
