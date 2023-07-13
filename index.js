@@ -13,6 +13,9 @@ function Logo(type,shapeColor,text,textColor) {
     this.textColor = textColor;
 };
 
+var filename = './examples/logo.svg';
+var svgBase = '<svg version="1.1" xmlns="http://www.w3.org/2000/svg">';
+
 function init() {
     inquirer
         .prompt([
@@ -57,8 +60,18 @@ function init() {
                 svgShape = circle.render();
             };
 
-            const text = new TextClass(shape.text,shape.textColor);
-            svgText = text.render();
+            console.log(svgShape);
+
+            const textclass = new TextClass(shape.text, shape.textColor);
+            svgText = textclass.render();
+
+            console.log(svgText);
+        })
+        .then(() => {
+            var output = svgBase+svgShape+svgText+'</svg>';
+            fs.writeFile(filename, (output), (err) =>
+                err ? console.log(err) : console.log("Success")
+            );
         })
         .catch((error) => {
             console.log(error);
@@ -68,5 +81,3 @@ function init() {
 
 // run app
 init();
-console.log(svgShape);
-console.log(svgText);
